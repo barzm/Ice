@@ -493,3 +493,33 @@ extension Sequence where Element == MenuBarItem {
         }
     }
 }
+// MARK: - NSWindow
+
+extension NSWindow {
+    /// The window's `CGWindowID`, or `nil` if not yet available.
+    var cgWindowID: CGWindowID? {
+        guard
+            windowNumber >= 0,
+            windowNumber <= Int(UInt32.max)
+        else {
+            return nil
+        }
+        return CGWindowID(windowNumber)
+    }
+
+    /// Publishes valid `CGWindowID` values as they become available.
+    var cgWindowIDPublisher: AnyPublisher<CGWindowID, Never> {
+        publisher(for: \.windowNumber)
+            .compactMap { windowNumber in
+                guard
+                    windowNumber >= 0,
+                    windowNumber <= Int(UInt32.max)
+                else {
+                    return nil
+                }
+                return CGWindowID(windowNumber)
+            }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+}

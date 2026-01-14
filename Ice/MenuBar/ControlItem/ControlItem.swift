@@ -36,6 +36,9 @@ final class ControlItem {
     /// The frame of the control item's window (`@Published`).
     @Published private(set) var windowFrame: CGRect?
 
+    /// The window's identifier, or `nil` if unavailable (`@Published`).
+    @Published private(set) var windowID: CGWindowID?
+
     /// The shared app state.
     private weak var appState: AppState?
 
@@ -61,14 +64,6 @@ final class ControlItem {
         statusItem.button?.window
     }
 
-    /// The identifier of the control item's window.
-    var windowID: CGWindowID? {
-        guard let window else {
-            return nil
-        }
-        return CGWindowID(window.windowNumber)
-    }
-
     /// A Boolean value that indicates whether the control item serves as
     /// a divider between sections.
     var isSectionDivider: Bool {
@@ -76,7 +71,7 @@ final class ControlItem {
     }
 
     /// A Boolean value that indicates whether the control item is currently
-    /// displayed in the menu bar.
+    /// displayed in the menu bar.x
     var isAddedToMenuBar: Bool {
         statusItem.isVisible
     }
@@ -225,6 +220,15 @@ final class ControlItem {
                 windowFrame = frame
             }
             .store(in: &c)
+
+        if let window {
+            window.cgWindowIDPublisher
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] windowID in
+                    self?.windowID = windowID
+                }
+                .store(in: &c)
+        }
 
         if let appState {
             appState.settingsManager.generalSettingsManager.$showIceIcon
