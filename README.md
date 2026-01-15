@@ -1,3 +1,5 @@
+> [!IMPORTANT]
+> This is a simple fork of the amazing [Ice](https://github.com/jordanbaird/Ice) application, with hopes to deprecate in the future. However, given the current state of the Ice repository and pending PRs, we hope this will be useful to the community to bridge the gap. 
 <div align="center">
     <img src="Ice/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" width=200 height=200>
     <h1>Ice</h1>
