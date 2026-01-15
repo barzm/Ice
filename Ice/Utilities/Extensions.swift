@@ -498,7 +498,7 @@ extension Sequence where Element == MenuBarItem {
 extension NSWindow {
     /// The window's `CGWindowID`, or `nil` if not yet available.
     var cgWindowID: CGWindowID? {
-        guard
+        guard 
             windowNumber >= 0,
             windowNumber <= Int(UInt32.max)
         else {
@@ -506,12 +506,12 @@ extension NSWindow {
         }
         return CGWindowID(windowNumber)
     }
-
+    
     /// Publishes valid `CGWindowID` values as they become available.
     var cgWindowIDPublisher: AnyPublisher<CGWindowID, Never> {
         publisher(for: \.windowNumber)
             .compactMap { windowNumber in
-                guard
+                guard 
                     windowNumber >= 0,
                     windowNumber <= Int(UInt32.max)
                 else {
@@ -523,3 +523,4 @@ extension NSWindow {
             .eraseToAnyPublisher()
     }
 }
+

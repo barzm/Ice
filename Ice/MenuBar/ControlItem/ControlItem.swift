@@ -35,6 +35,9 @@ final class ControlItem {
 
     /// The frame of the control item's window (`@Published`).
     @Published private(set) var windowFrame: CGRect?
+    
+    /// The window's identifier, or `nil` if unavailable (`@Published`).
+    @Published private(set) var windowID: CGWindowID?
 
     /// The window's identifier, or `nil` if unavailable (`@Published`).
     @Published private(set) var windowID: CGWindowID?
