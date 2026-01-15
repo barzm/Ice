@@ -39,6 +39,9 @@ final class ControlItem {
     /// The window's identifier, or `nil` if unavailable (`@Published`).
     @Published private(set) var windowID: CGWindowID?
 
+    /// The window's identifier, or `nil` if unavailable (`@Published`).
+    @Published private(set) var windowID: CGWindowID?
+
     /// The shared app state.
     private weak var appState: AppState?
 
@@ -71,7 +74,7 @@ final class ControlItem {
     }
 
     /// A Boolean value that indicates whether the control item is currently
-    /// displayed in the menu bar.
+    /// displayed in the menu bar.x
     var isAddedToMenuBar: Bool {
         statusItem.isVisible
     }
